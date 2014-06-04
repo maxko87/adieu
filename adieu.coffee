@@ -25,7 +25,7 @@ if Meteor.isClient
     id = Session.get("person_id")
     People.findOne(id)
 
-  Template.search.autocomplete_settings = ->
+  Template.search_bar.autocomplete_settings = ->
     position: "bottom"
     limit: 5
     rules: [
@@ -43,12 +43,15 @@ if Meteor.isClient
         find_person(person)
 
   Template.post_box.events
-    "keypress #post-box-input": (evt) ->
-      if evt.which == 13
-        content = $(evt.target).val()
-        id = Session.get("person_id")
-        comment = {content: content}
-        People.update({_id: id}, {$push: {comments: comment}})
+    #keypress #post-box-input, 
+    "click #post-box-submit": (evt) ->
+      content = $("#post-box-input").val()
+      id = Session.get("person_id")
+      comment = {content: content}
+      People.update({_id: id}, {$push: {comments: comment}})
+      $("#post-box-input").val("") 
+      # TODO: disappear post-box
+      return false
 
 
 

@@ -24,12 +24,7 @@
 <template name="search">
   <div class="search">
     <div class="search-nav">
-      <div class="search">
-        <form action="post">
-          <!-- <input type="search" placeholder="Name"> -->
-          {{> inputAutocomplete settings=autocomplete_settings id="search-box"}}
-        </form>
-      </div>
+      {{> search_bar}}
     </div>   
   </div>
 </template>
@@ -42,29 +37,19 @@
     <div class="text">
       Wish your friends good luck or something...
     </div>
-    <div class="search">
-      <form action="post">
-        <input type="search" placeholder="Name"/>
-      </form>
-    </div>
+    {{> search_bar}}
   </div>
 </template>
 
+<template name="search_bar">
+  <div class="search">
+    {{> inputAutocomplete settings=autocomplete_settings id="search-box"}}
+  </div>
+</template>
+
+
 <template name="person_page">
   <div class="person_page">
-    Welcome to {{this.name}}'s page.
-    <!-- TODO: check if they've already left a comment -->
-    {{> post_box}}
-    {{#if this.comments}}
-      {{#each this.comments}}
-        {{> comment_box this}}
-      {{/each}}
-    {{else}}
-      No comments yet!
-    {{/if}}
-  </div>
-
-  <div class="content">
     <div class="username">
       {{this.name}}
     </div>
@@ -100,10 +85,8 @@
       Write your own anonymous post:
     </div>
     <div class="text">
-      <form action="post">
-        <textarea id="post-box-input" placeholder="Comment Text..."></textarea>
-        <input type="submit" value="Post"/>
-      </form>
+      <textarea id="post-box-input" placeholder="Comment Text..."></textarea>
+      <input type="submit" id="post-box-submit" value="Post"/>
     </div>
   </div>
 </template>
