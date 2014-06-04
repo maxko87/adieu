@@ -1,5 +1,8 @@
 <head>
   <title>Adieu 2014</title>
+  <link rel="stylesheet" type="text/css" href="styles/adieu.css" />
+  <link rel="stylesheet" type="text/css" href="styles/fa.css" />
+  <link href='http://fonts.googleapis.com/css?family=Tangerine|Lato' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -7,26 +10,44 @@
 </body>
 
 <template name="content">
-  {{> search}}
   {{#if person}}
+    {{> search}}
     {{> person_page person}}
   {{else}}
     {{> main_page}}
   {{/if}}
+
+  <div class="darken">
+  </div>
 </template>
 
 <template name="search">
   <div class="search">
-    Search for a 2014.
-    <!-- <input type="text" id="search-box"> -->
-    <!-- <button id="search-button">Search</button> -->
-
-    {{> inputAutocomplete settings=autocomplete_settings id="search-box"}}
+    <div class="search-nav">
+      <div class="search">
+        <form action="post">
+          <!-- <input type="search" placeholder="Name"> -->
+          {{> inputAutocomplete settings=autocomplete_settings id="search-box"}}
+        </form>
+      </div>
+    </div>   
   </div>
 </template>
 
 <template name="main_page">
-  <h1>Write terrible things about each other, anonymously.</h1>
+  <div class="hero">
+    <div class="title">
+      Adieu
+    </div>
+    <div class="text">
+      Wish your friends good luck or something...
+    </div>
+    <div class="search">
+      <form action="post">
+        <input type="search" placeholder="Name"/>
+      </form>
+    </div>
+  </div>
 </template>
 
 <template name="person_page">
@@ -42,18 +63,48 @@
       No comments yet!
     {{/if}}
   </div>
+
+  <div class="content">
+    <div class="username">
+      {{this.name}}
+    </div>
+
+    {{> post_box}}
+
+    {{#if this.comments}}
+      {{#each this.comments}}
+        {{> comment_box this}}
+      {{/each}}
+    {{else}}
+      No comments yet!
+    {{/if}}
+  </div>
 </template>
 
 <template name="comment_box">
   <div class="comment-box">
-    {{this.content}}
+    <div class="post">
+      <div class="details">
+        DATETIME GOES HERE
+      </div>
+      <div class="text">
+        {{this.content}}
+      </div>
+    </div>
   </div>
 </template>
 
 <template name="post_box">
-  <div class="post-box">
-    Write something of your own!
-    <input id="post-box-input" type="text">
+  <div class="post">
+    <div class="details">
+      Write your own anonymous post:
+    </div>
+    <div class="text">
+      <form action="post">
+        <textarea id="post-box-input" placeholder="Comment Text..."></textarea>
+        <input type="submit" value="Post"/>
+      </form>
+    </div>
   </div>
 </template>
 
