@@ -1,0 +1,62 @@
+<head>
+  <title>Adieu 2014</title>
+</head>
+
+<body>
+  {{> content}}
+</body>
+
+<template name="content">
+  {{> search}}
+  {{#if person}}
+    {{> person_page person}}
+  {{else}}
+    {{> main_page}}
+  {{/if}}
+</template>
+
+<template name="search">
+  <div class="search">
+    Search for a 2014.
+    <!-- <input type="text" id="search-box"> -->
+    <!-- <button id="search-button">Search</button> -->
+
+    {{> inputAutocomplete settings=autocomplete_settings id="search-box"}}
+  </div>
+</template>
+
+<template name="main_page">
+  <h1>Write terrible things about each other, anonymously.</h1>
+</template>
+
+<template name="person_page">
+  <div class="person_page">
+    Welcome to {{this.name}}'s page.
+    <!-- TODO: check if they've already left a comment -->
+    {{> post_box}}
+    {{#if this.comments}}
+      {{#each this.comments}}
+        {{> comment_box this}}
+      {{/each}}
+    {{else}}
+      No comments yet!
+    {{/if}}
+  </div>
+</template>
+
+<template name="comment_box">
+  <div class="comment-box">
+    {{this.content}}
+  </div>
+</template>
+
+<template name="post_box">
+  <div class="post-box">
+    Write something of your own!
+    <input id="post-box-input" type="text">
+  </div>
+</template>
+
+<template name="autocomplete_pill">
+  <span class="label">{{name}}</span>
+</template>
