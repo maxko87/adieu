@@ -1,7 +1,8 @@
 @People = new Meteor.Collection("people")
 
 if Meteor.isServer
-  persons = [{"name": "Max", "athena": "mkolysh"}, {"name": "Maximax", "athena": "mkolysh2"}, {"name": "Doug", "athena": "dougfeig"}, {"name": "Ben", "athena": "bfrank"}]
+  persons = Assets.getText('students.json')
+  # persons = [{"name": "Max", "athena": "mkolysh"}, {"name": "Maximax", "athena": "mkolysh2"}, {"name": "Doug", "athena": "dougfeig"}, {"name": "Ben", "athena": "bfrank"}]
 
   if People.find().count() == 0
     for person in persons
