@@ -2,10 +2,13 @@
 
 if Meteor.isServer
   persons = Assets.getText('students.json')
+  persons = JSON.parse(persons)
   # persons = [{"name": "Max", "athena": "mkolysh"}, {"name": "Maximax", "athena": "mkolysh2"}, {"name": "Doug", "athena": "dougfeig"}, {"name": "Ben", "athena": "bfrank"}]
 
   if People.find().count() == 0
     for person in persons
+      # console.log person
+      # console.log person.name
       People.insert({"name": person.name, "athena": person.athena, "comments": []})
 
   Meteor.publish "people", ->
